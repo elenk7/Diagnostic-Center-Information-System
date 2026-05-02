@@ -1,8 +1,8 @@
-public class human {
+class Human {
     private String phone;
     private String name;
     
-    public human(String name, String phone) {
+    Human(String name, String phone) {
         this.name = name;
         this.phone = phone;
     }
