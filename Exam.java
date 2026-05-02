@@ -1,5 +1,5 @@
 abstract class Exam{
-    private static int idCounter;
+    private static int idCounter = 1;
     private int code;
     private String examName;
     private String categoryName;
@@ -7,7 +7,7 @@ abstract class Exam{
     private int doctorID;
 
     Exam(String examName, String categoryName, int maxSlots, int doctorID){
-        this.code = code;
+        this.code = idCounter++;
         this.examName = examName;
         this.categoryName = categoryName;
         this.maxSlots = maxSlots;
