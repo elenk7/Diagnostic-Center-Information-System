@@ -5,10 +5,18 @@ public class Doctor extends Human{
     private int experience;
 
     Doctor(String name, String phone, String specialty, int experience){
-        Human(name, phone);
+        super(name, phone);
         this.code = idCounter++;
         this.specialty = specialty;
         this.experience = experience;
+    }
+
+    public int getCode(){
+        return this.code;
+    }
+
+    public void setCode(){
+        this.code = code;
     }
 
     public String getSpecialty(){
@@ -16,7 +24,7 @@ public class Doctor extends Human{
     }
 
     public int getExperience(){
-        this.experience = experience;
+        return this.experience;
     }
 
     public void setSpecialty(String specialty){
@@ -25,5 +33,10 @@ public class Doctor extends Human{
 
     public void setExperience(int experience){
         this.experience = experience;
+    }
+
+    @Override
+    public String toString(){
+        return "Code: " + this.code +"/n" + super.toString() + "/nSpecialty: " + this.specialty + "/nYears of Experience: " + this.experience;
     }
 }
