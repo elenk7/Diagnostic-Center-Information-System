@@ -1,4 +1,5 @@
 abstract class Exam{
+<<<<<<< Updated upstream
     private String examID;
     private String examName;
     private String categoryName;
@@ -63,4 +64,43 @@ abstract class Exam{
         return this.doctorID;
     }
 
+=======
+    private static int idCounter;
+    private int code;
+    private String examName;
+    private String categoryName;
+    private int maxSlots;
+    private int doctorID;
+
+    Exam(String examName, String categoryName, int maxSlots, int doctorID){
+        this.code = code;
+        this.examName = examName;
+        this.categoryName = categoryName;
+        this.maxSlots = maxSlots;
+        this.doctorID = doctorID;
+    }
+
+    public String getExamName(){
+        return this.examName;
+    }
+
+    public String getCategoryName(){
+        return this.categoryName;
+    }
+    
+    public int getCode(){
+        this.code = code;
+    }
+
+    public int getMaxSlots(){
+        this.maxSlots = maxSlots;
+    }
+
+    public abstract double getCost();
+
+    @Override
+    public String toString(){
+        return "AppointmentID: " + this.code + "/nExam Name: " + this.examName + "/nCategory Name: " + this.categoryName + "/nMax Slots per Day: " + this.maxSlots + "/nDoctorID: " + this.doctorID;
+    }
+>>>>>>> Stashed changes
 }
