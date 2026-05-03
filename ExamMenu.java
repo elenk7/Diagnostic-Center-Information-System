@@ -21,7 +21,7 @@ public class ExamMenu{
         for (Exam exam: exams.values()){
             if (exam.getCode() == examID){
                 for(Appointment appointment : appointments.values()){
-                   if (appointment.getExamID() = examID){
+                   if (appointment.getExamID() == examID){
                     System.out.println(appointment);
                     found = true;
                    }    
