@@ -1,8 +1,9 @@
-public class Human{
-    private String name;
-    private String phone;
+class Human {
 
-    Human(String name, String phone){
+    private String phone;
+    private String name;
+    
+    Human(String name, String phone) {
         this.name = name;
         this.phone = phone;
     }
@@ -24,6 +25,6 @@ public class Human{
     }
 
     public String toString(){
-        return "Name: " + this.name + "/nPhone: " + this.phone;
+        return "Name:" + this.name + "\nPhone:" + this.phone;
     }
 }
