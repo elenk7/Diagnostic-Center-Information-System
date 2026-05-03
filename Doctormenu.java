@@ -6,14 +6,6 @@ public class Doctormenu{
         doctors.put(doctor.getCode(), doctor);
     }
 
-    public Doctor getDoctor(int doctorID){
-        return doctors.get(doctorID);
-    }
-
-    public void removeDoctor(int doctorID){
-        doctors.remove(doctorID);
-    }
-
     public void listAll(){
         if (doctors.isEmpty()){
             System.out.println("No doctors available.");
@@ -24,19 +16,29 @@ public class Doctormenu{
         }
     }
 
-    public Doctor searchDoctorCode(int doctorID){
-        return doctors.get(doctorID);
+    public void searchDoctorExam(int doctorID, ExamMenu exams){
+        for(Exam exam : exams.values()){
+            if (exam.getDoctorID() == doctorID){
+                System.out.println(exam);
+            }
+        }
     }
+    
 
-    public void searchDoctorappointment(int doctorID, AppointmentMenu appointmentMenu, ExamMenu examMenu){
+    public void searchDoctorAppointment(int doctorID, AppointmentMenu appointments, ExamMenu exams){
         Doctor doctor = doctors.get(doctorID);
         if (doctor != null) {
             System.out.println("Appointments for Doctor ID: " + doctorID);
-            for (Exam exam : examMenu.getAllExams()) {
-                if (exam.getDoctorID() == doctorID) {
-                    
+            for (Exam exam : exams.values()) {
+                for (Appointment appointment : appointments.values()){
+                    if (exam.getCode() == appointment.getExamID()) {
+                        System.out.println(appointment);
+                    }
                 }
+                
             }
+        }else{
+            System.out.println("No doctors with this ID: " + doctorID);
         }
     }
 }
