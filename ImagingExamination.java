@@ -3,8 +3,9 @@ class ImagingExamination extends Exam {
     private double cost;
     private double examCost;
     private static final double costIncreaseRate = 0.10;
+    
 
-    ImagingExamination(String code, String examName, String categoryName, String examSpecialty, String maxSlots, double cost, int doctorID, String machineType) {
+    ImagingExamination(String code, String examName, String categoryName, String examSpecialty, int maxSlots, double cost, int doctorID, String machineType) {
         super(code, examName, categoryName, examSpecialty, maxSlots, cost, doctorID);
         this.machineType = machineType;
         this.cost = cost;
