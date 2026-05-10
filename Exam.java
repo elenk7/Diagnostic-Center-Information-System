@@ -1,5 +1,5 @@
 abstract class Exam{
-    private String code;
+    private int code;
     private String examName;
     private String categoryName;
     private String examSpecialty;
@@ -20,7 +20,7 @@ abstract class Exam{
         this.doctorID = doctorID;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
     public void setExamName(String examName) {
