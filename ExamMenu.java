@@ -16,7 +16,7 @@ public class ExamMenu{
         }
     }
 
-    public void examAppointments(int examID){
+    public void examAppointments(int examID, HashMap<Integer, Appointment> appointments){
         boolean found = false;
         for (Exam exam: exams.values()){
             if (exam.getCode() == examID){
