@@ -1,19 +1,26 @@
+import java.util.HashMap;
 public class MicrobiologicalExamination extends Exam{
     private double examCost;
     private String sampleType;
     private static final double costIncreaseRate = 0.2;
+    private boolean fastResults;
 
-    MicrobiologicalExamination(String examName, String categoryName, int maxSlots, int doctorID, double cost, String sampleType){
+    MicrobiologicalExamination(int code, String examName, String categoryName, String examSpecialty,  int maxSlots, int doctorID, double cost, String sampleType){
         /*Constructor for Microbiological Examination class that initializes the exam name, category name, maximum slots, doctor ID, cost, and sample type.
          It also calls the constructor of the superclass Exam to initialize the common attributes of all exams.*/
-        super(examName, categoryName, maxSlots, doctorID);
+        super(code, examName, categoryName, examSpecialty, maxSlots, cost, doctorID);
         this.examCost = cost;
         this.sampleType = sampleType;
     }
 
     @Override
-    public double getCost(){
-        if(fastresults){
+    public double getCost(HashMap<Integer, Appointment> appointments){
+        for(Appointment appointment : appointments.values()){
+            if (this.getCode() == appointment.getExamID()){
+                fastResults = appointment.getFastResults();
+            }
+        }
+        if(fastResults){
             this.examCost = this.examCost + this.examCost * costIncreaseRate;
             return this.examCost;
         }
