@@ -1,13 +1,14 @@
+import java.util.HashMap;
 class SpecializedExamination extends Exam{
     private String examSpecialty;
     private double cost;
     private double examCost;
     private static final double costIncreaseRate = 0.30;
+    private boolean fastResults;
 
 
-    SpecializedExamination(String examID, String examName, String categoryName, String examSpecialty, String maxSlots, double cost, int doctorID){
+    SpecializedExamination(int examID, String examName, String categoryName, String examSpecialty, int maxSlots, double cost, int doctorID){
         super(examID, examName, categoryName, examSpecialty, maxSlots, cost, doctorID);
-        this.examSpecialty = examSpecialty;
         this.cost = cost;
     }
 
@@ -19,7 +20,13 @@ class SpecializedExamination extends Exam{
         this.examSpecialty = examSpecialty;
     }
 
-    public double getCost(){
+    @Override
+    public double getCost(HashMap<Integer, Appointment> appointments){
+        for(Appointment appointment : appointments.values()){
+            if (this.getCode() == appointment.getExamID()){
+                fastResults = appointment.getFastResults();
+            }
+        }
         if (fastResults){
             examCost = cost + (cost * costIncreaseRate);
         }else{
@@ -29,7 +36,7 @@ class SpecializedExamination extends Exam{
     }
 
     public String toString(){
-        return super.toString() + "/nExam Specialty: " + this.examSpecialty + "/nCost: " + this.examCost;
+        return super.toString() + "\nExam Specialty: " + this.examSpecialty + "\nCost: " + this.examCost;
     }
     
 }
