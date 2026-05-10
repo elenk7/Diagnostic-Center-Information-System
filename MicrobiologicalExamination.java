@@ -5,10 +5,10 @@ public class MicrobiologicalExamination extends Exam{
     private static final double costIncreaseRate = 0.2;
     private boolean fastResults;
 
-    MicrobiologicalExamination(int code, String examName, String categoryName, String examSpecialty,  int maxSlots, int doctorID, double cost, String sampleType){
+    MicrobiologicalExamination(String examName, String categoryName, String sampleType,  int maxSlots, double cost, int doctorID){
         /*Constructor for Microbiological Examination class that initializes the exam name, category name, maximum slots, doctor ID, cost, and sample type.
          It also calls the constructor of the superclass Exam to initialize the common attributes of all exams.*/
-        super(code, examName, categoryName, examSpecialty, maxSlots, cost, doctorID);
+        super(examName, categoryName, sampleType, maxSlots, cost, doctorID);
         this.examCost = cost;
         this.sampleType = sampleType;
     }
