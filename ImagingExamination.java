@@ -7,8 +7,8 @@ class ImagingExamination extends Exam {
     private boolean fastResults;
     
 
-    ImagingExamination(int code, String examName, String categoryName, String examSpecialty, int maxSlots, double cost, int doctorID, String machineType) {
-        super(code, examName, categoryName, examSpecialty, maxSlots, cost, doctorID);
+    ImagingExamination(String examName, String categoryName, String machineType, int maxSlots, double cost, int doctorID) {
+        super(examName, categoryName, machineType, maxSlots, cost, doctorID);
         this.machineType = machineType;
         this.cost = cost;
     }
