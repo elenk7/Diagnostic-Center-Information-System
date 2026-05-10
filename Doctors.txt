@@ -1,0 +1,4 @@
+DOCTOR D1 111 Cardiology 10
+DOCTOR D2 222 Radiology 8
+DOCTOR D3 333 Μicrobiology 3
+DOCTOR D4 444 Neurology 2
