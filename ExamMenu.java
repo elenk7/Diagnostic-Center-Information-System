@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.HashMap;
 public class ExamMenu{
     private HashMap<Integer, Exam> exams = new HashMap<>();
@@ -10,9 +11,17 @@ public class ExamMenu{
         if (exams.isEmpty()){
             System.out.println("No exams");
         }else {
-            for (Exam exam: exams.values()){
-                System.out.println(exam);    
-            }     
+                // Παίρνει όλα τα Item από το products,
+		    exams.values() 
+		
+			// μετατρέπει τη συλλογή σε stream,
+			.stream()
+			
+			// τα ταξινομεί αλφαβητικά με βάση τον τίτλο,
+			.sorted(Comparator.comparing(Exam::getExamName, String.CASE_INSENSITIVE_ORDER)) 
+			
+			// και τα εμφανίζει.
+			.forEach(System.out::println);        
         }
     }
 
