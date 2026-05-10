@@ -7,8 +7,8 @@ class SpecializedExamination extends Exam{
     private boolean fastResults;
 
 
-    SpecializedExamination(int examID, String examName, String categoryName, String examSpecialty, int maxSlots, double cost, int doctorID){
-        super(examID, examName, categoryName, examSpecialty, maxSlots, cost, doctorID);
+    SpecializedExamination(String examName, String categoryName, String examSpecialty, int maxSlots, double cost, int doctorID){
+        super(examName, categoryName, examSpecialty, maxSlots, cost, doctorID);
         this.cost = cost;
     }
 
