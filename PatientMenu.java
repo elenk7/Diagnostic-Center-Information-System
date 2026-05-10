@@ -3,7 +3,7 @@ import java.util.HashMap;
 class PatientMenu {
     private HashMap<Integer, Patient> patients= new HashMap<>();
    
-    public void addPatient(){
+    public void addPatient(Patient patient){
         patients.put(patient.getCode(), patient);
     }
                
@@ -17,7 +17,7 @@ class PatientMenu {
         }
     }
                 
-    public void findByCode(int code){ 
+    public void findByCode(int code, HashMap<Integer, Appointment> appointments ){ 
         Patient patient = patients.get(code);
         if (patient != null) {
             for (Appointment appointment : appointments.values()){
