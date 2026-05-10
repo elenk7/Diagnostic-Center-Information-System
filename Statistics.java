@@ -49,7 +49,7 @@ public static void totalRevenuePerPatient(HashMap <Integer, Patient> patients, H
 
         double patientTotal = 0;
 
-        System.out.println("\nPatient ID: " + patient.getCode());
+        System.out.println("/nPatient ID: " + patient.getCode());
         System.out.println("Patient Name: " + patient.getName());
 
         boolean found = false;
