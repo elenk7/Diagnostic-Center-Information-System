@@ -1,6 +1,6 @@
 import java.util.HashMap;
 abstract class Exam{
-    private int code;
+    private static int idCounter = 1;
     private String examName;
     private String categoryName;
     private String examSpecialty;
@@ -8,11 +8,12 @@ abstract class Exam{
     private double cost;
     private int doctorID;
     private boolean fastResults;
+    private int code;
 
     abstract double getCost(HashMap<Integer, Appointment> appointments);
 
-    Exam(int code, String examName, String categoryName, String examSpecialty, int maxSlots, double cost, int doctorID){
-        this.code = code;
+    Exam(String examName, String categoryName, String examSpecialty, int maxSlots, double cost, int doctorID){
+        this.code = idCounter++;
         this.examName = examName;
         this.categoryName = categoryName;
         this.examSpecialty = examSpecialty;
