@@ -13,6 +13,7 @@ public class Statistics{
                 }
 
                 return sum;
+                
 
         }
         public double revenueAllPatients(HashMap<Integer, Appointment> appointments, HashMap<Integer, Exam> exams, HashMap<Integer, Patient> patients){
