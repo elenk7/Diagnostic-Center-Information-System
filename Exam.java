@@ -1,3 +1,4 @@
+import java.util.HashMap;
 abstract class Exam{
     private int code;
     private String examName;
@@ -6,11 +7,11 @@ abstract class Exam{
     private int maxSlots;
     private double cost;
     private int doctorID;
+    private boolean fastResults;
 
+    abstract double getCost(HashMap<Integer, Appointment> appointments);
 
-    abstract double getCost();
-
-    Exam(String code, String examName, String categoryName, String examSpecialty, String maxSlots, double cost, int doctorID){
+    Exam(int code, String examName, String categoryName, String examSpecialty, int maxSlots, double cost, int doctorID){
         this.code = code;
         this.examName = examName;
         this.categoryName = categoryName;
@@ -32,7 +33,7 @@ abstract class Exam{
     public void setExamSpecialty(String examSpecialty) {
         this.examSpecialty = examSpecialty;
     }
-    public void setMaxSlots(String maxSlots) {
+    public void setMaxSlots(int maxSlots) {
         this.maxSlots = maxSlots;
     }
    
@@ -40,7 +41,7 @@ abstract class Exam{
         this.doctorID = doctorID;
     }
 
-    public String getCode() {
+    public int getCode() {
         return this.code;
     }
 
@@ -69,4 +70,12 @@ abstract class Exam{
         return "AppointmentID: " + this.code + "\nExam Name: " + this.examName + "\nCategory Name: " + this.categoryName + "\nMax Slots per Day: " + this.maxSlots + "\nDoctorID: " + this.doctorID;
     }
 
+    public boolean findFastResults(int examID, HashMap<Integer, Appointment> appointments){
+        for(Appointment appointment : appointments.values()){
+            if(appointment.getExamID() == examID){
+                return appointment.getFastResults();
+            }
+        }
+        return false;
+    }
 }
