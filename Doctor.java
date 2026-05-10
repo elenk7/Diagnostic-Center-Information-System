@@ -15,7 +15,7 @@ public class Doctor extends Human{
         return this.code;
     }
 
-    public void setCode(){
+    public void setCode(int code){
         this.code = code;
     }
 
