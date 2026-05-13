@@ -26,7 +26,6 @@ class Patient extends Human {
     }
 
     public String toString() {
-        return "\nPatientID: " + this.code + super.toString() + "\n Email: " + this.email;
+        return super.toString() + "\nPatientID: " + this.code + "\n Email: " + this.email;
     }
-
 }
