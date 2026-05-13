@@ -1,6 +1,16 @@
+import java.io.*;
 import java.util.*;
 public class Main {
     public static void main(String[] args){
+        FileManager fm= new FileManager();
+        String patientsFilePath = "patients.txt";
+        String doctorsFilePath = "doctors.txt";
+        String examsFilePath = "exams.txt";
+        String appointmentsFilePath = "appointments.txt";
+        File patientsFile = new File(patientsFilePath);
+        File doctorsFile = new File(doctorsFilePath);
+        File examsFile = new File(examsFilePath);
+        File appointmentsFile = new File(appointmentsFilePath);
         boolean exit=true;
         while(exit){
             System.out.println("Welcome to the Medical Clinic Management System");
