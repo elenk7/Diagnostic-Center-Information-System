@@ -96,7 +96,32 @@ class FileManager {
         }
 		
     }// loadFile
-	
+
+    void storeFile(String filePath) {
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+
+            for (Doctor doctor : doctors.values()) {
+                writer.write("DOCTOR " + doctor.getName() + " " + doctor.getPhone() + " " + doctor.getSpecialty() + " " + doctor.getExperience() + "\n");
+            }
+
+            for (Patient patient : patients.values()) {
+                writer.write("PATIENT " + patient.getName() + " " + patient.getPhone() + " " + patient.getEmail() + "\n");
+            }
+
+            for (Exam exam : exams.values()) {
+                writer.write("EXAM " + exam.getExamName() + " " + exam.getCategoryName() + " " + exam.getExamSpecialty() + " " + exam.getMaxSlots() + " " + exam.getCost(appointments) + " " + exam.getDoctorID() + "\n");
+            }
+
+            for (Appointment appointment : appointments.values()) {
+                writer.write("APPOINTMENT " + appointment.getPatientID() + " " + appointment.getExamID() + " " + appointment.getFastResults() + " " + appointment.getExamDate()  + "\n");
+            }
+            
+        }catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
+    }// storeFile
+        	
 	
 }
 
