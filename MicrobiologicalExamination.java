@@ -16,15 +16,15 @@ public class MicrobiologicalExamination extends Exam{
     @Override
     public double getCost(HashMap<Integer, Appointment> appointments){
         for(Appointment appointment : appointments.values()){
-            if (this.getCode() == appointment.getExamID()){
+            if (this.getCode() == appointment.getExamID()){  //Checks if the current exam's code matches the exam ID in the appointment. If it does, it retrieves the fast results option from the appointment and stores it in the fastResults variable.
                 fastResults = appointment.getFastResults();
             }
         }
-        if(fastResults){
+        if(fastResults){  //If the fast results option is true, it calculates the exam cost by adding a percentage increase to the base cost and returns the updated exam cost.
             this.examCost = this.examCost + this.examCost * costIncreaseRate;
             return this.examCost;
         }
-        return this.examCost;
+        return this.examCost;  //If the fast results option is false, it simply returns the base exam cost without any modifications.
     }
 
     public String getSampleType(){
@@ -37,6 +37,6 @@ public class MicrobiologicalExamination extends Exam{
 
     @Override
     public String toString(){
-        return super.toString() + "/nSample Type: " + this.sampleType + "/nCost: " + this.examCost;
+        return super.toString() + "\nSample Type: " + this.sampleType + "\nCost: " + this.examCost;
     }
 }
