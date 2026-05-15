@@ -37,6 +37,6 @@ public class Doctor extends Human{
 
     @Override
     public String toString(){
-        return super.toString() + "\nDoctorID: " + this.code + "\nSpecialty: " + this.specialty + "\nYears of Experience: " + this.experience;
+        return super.toString() + " | DoctorID: " + this.code + " | Specialty: " + this.specialty + " | Years of Experience: " + this.experience;
     }
 }
