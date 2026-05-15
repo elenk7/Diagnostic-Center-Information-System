@@ -3,27 +3,27 @@ import java.util.*;
 public class Main {
     public static void main(String[] args){
         FileManager fm= new FileManager();
-        String patientsFilePath = "Patients.txt";
+        String patientsFilePath = "Patients.txt"; // Define file paths for patients, doctors, exams, and appointments data files. These file paths are used to create File objects and to load data into the system using the FileManager class. The file paths are specified as strings and can be modified to point to the correct location of the data files on the system.
         String doctorsFilePath = "Doctors.txt";
         String examsFilePath = "Exams.txt";
         String appointmentsFilePath = "Appointments.txt";
-        File patientsFile = new File(patientsFilePath);
+        File patientsFile = new File(patientsFilePath);  // Create File objects for each of the data files (patients, doctors, exams, appointments). These File objects are used to check if the files exist and to read/write data from/to them. The file paths are specified as strings and passed to the File constructor to create the corresponding File objects.
         File doctorsFile = new File(doctorsFilePath);
         File examsFile = new File(examsFilePath);
         File appointmentsFile = new File(appointmentsFilePath);
-        PatientMenu patientMenu = new PatientMenu(fm.patients);
+        PatientMenu patientMenu = new PatientMenu(fm.patients); // Create instances of the menu classes (PatientMenu, DoctorMenu, ExamMenu, AppointmentMenu) and the Statistics class. These instances are initialized with the corresponding HashMaps from the FileManager class (patients, doctors, exams, appointments) to allow them to manage and manipulate the data effectively. The menu classes provide methods for adding, viewing, and finding patients, doctors, exams, and appointments, while the Statistics class provides methods for calculating revenue based on patients, exams, and appointments.
         DoctorMenu doctorMenu = new DoctorMenu(fm.doctors);
         ExamMenu examMenu = new ExamMenu(fm.exams);
         AppointmentMenu appointmentMenu = new AppointmentMenu(fm.appointments);
         Statistics statistics = new Statistics();
         boolean exit=true;
-        fm.loadFile(patientsFilePath);
+        fm.loadFile(patientsFilePath);  // Load data from files into the system using the FileManager class. The loadFile method reads the specified file and populates the corresponding HashMaps (doctors, patients, exams, appointments) with the data. This allows the system to have access to the existing data when managing patients, doctors, exams, appointments, and statistics.
         fm.loadFile(doctorsFilePath);
         fm.loadFile(examsFilePath);
         fm.loadFile(appointmentsFilePath);
         Scanner scanner= new Scanner(System.in);
         for (Exam exam : fm.exams.values()) {
-            exam.getCost(fm.appointments);
+            exam.getCost(fm.appointments);  
         }
         while(exit){
             System.out.println("Welcome to the Medical Clinic Management System");
@@ -52,6 +52,7 @@ public class Main {
                             System.out.println("Adding a new patient...");
                             System.out.println("Enter patient name:");
                             String name = scanner.nextLine();
+                            name = scanner.nextLine();
                             System.out.println("Enter patient phone:");
                             String phone = scanner.nextLine();
                             System.out.println("Enter patient email:");
@@ -70,6 +71,7 @@ public class Main {
                             System.out.println("Enter patient code:");
                             int code = scanner.nextInt();
                             patientMenu.findByCode(code, fm.appointments);
+                            
                             break;
                         case 4:
                             // Return to main menu
@@ -88,7 +90,7 @@ public class Main {
                     System.out.println("2. View Doctors");
                     System.out.println("3. Find Doctor Exams");
                     System.out.println("4. Find Doctor Appointments");
-                    System.out.println("4. Return");
+                    System.out.println("5. Return");
                     int doctorChoice = new java.util.Scanner(System.in).nextInt();
                     switch (doctorChoice) {
                         case 1:
@@ -96,6 +98,7 @@ public class Main {
                             System.out.println("Adding a new doctor...");
                             System.out.println("Enter doctor name:");
                             String name = scanner.nextLine();
+                            name = scanner.nextLine();
                             System.out.println("Enter doctor phone:");
                             String phone = scanner.nextLine();
                             System.out.println("Enter doctor specialty(Cardiology, Microbiology, Radiology, Neurology):");
@@ -160,7 +163,7 @@ public class Main {
                             System.out.println("2. Microbiological");
                             System.out.println("3. Specialized");
                             int espec = scanner.nextInt();
-                            switch (espec) {
+                            switch (espec) {  // Switch statement to determine the type of exam being added based on user input. Depending on the category selected, it prompts the user for additional information specific to that category (e.g., machine type for Imaging, sample type for Microbiological, exam specialty for Specialized) and creates an instance of the corresponding exam class (ImagingExamination, MicrobiologicalExamination, or SpecializedExamination). The newly created exam is then added to the exam menu and its cost is calculated based on the appointments.
                                 case 1:
                                     categoryName = "Imaging";
                                     System.out.println("Enter machine type:");
@@ -257,7 +260,7 @@ public class Main {
                                         int sum = 0;
                                         int maxSlots = 0;
                                         for (Exam exam : fm.exams.values()) {
-                                            for (Appointment appointment : fm.appointments.values()) {
+                                            for (Appointment appointment : fm.appointments.values()) {  
                                                 if (appointment.getExamID() == exam.getCode() && appointment.getExamDate().equals(examDate) && !appointment.getDeleted()) {
                                                     maxSlots = exam.getMaxSlots();
                                                     sum = sum + 1;
@@ -294,7 +297,7 @@ public class Main {
                                 System.out.println("Enter appointment code to remove:");
                                 int code = scanner.nextInt();
                                 appointmentMenu.removeAppointment(code);
-                                if (fm.appointments.containsKey(code)){
+                                if (fm.appointments.containsKey(code)){  // Check if appointment exists
                                     fm.appointments.get(code).setDeleted(true);
                                     System.out.println("Appointment removed.");
                                 }   
@@ -303,9 +306,9 @@ public class Main {
                                 // Find Appointment by date
                                 System.out.println("Enter date (YYYY-MM-DD):");
                                 String date = scanner.next();
-                                while (!date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                                while (!date.matches("\\d{4}-\\d{2}-\\d{2}")) {  // Validate date format
                                     System.out.println("Invalid date format. Please enter the date in YYYY-MM-DD format.");
-                                    examDate = scanner.next();
+                                    date = scanner.next();
                                 }
                                 appointmentMenu.showAppointmentDay(date, fm.exams, fm.patients);
                                 break;
@@ -330,7 +333,7 @@ public class Main {
                             System.out.println("Calculating revenue by patient...");
                             patientMenu.viewPatients(); 
                             statistics.revenuePatient(fm.appointments, fm.exams, fm.patients);
-                            
+                            break;
                         case 2:
                             // Code to calculate revenue by exam
                             System.out.println("Calculating revenue by exam...");
@@ -349,6 +352,7 @@ public class Main {
                             break;
                         default:
                             System.out.println("Invalid option. Returning to main menu.");
+                            break;
                     }
                     
                     
@@ -359,6 +363,7 @@ public class Main {
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
+                    break;
             }
         }
         
