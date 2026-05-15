@@ -5,13 +5,15 @@ public class Appointment{
     private int examID;
     private boolean fastResults;
     private String examDate;
+    private boolean deleted;
 
-    Appointment(int patientID, int examID, boolean fastResults, String examDate){
+    Appointment(int patientID, int examID, boolean fastResults, String examDate, boolean deleted){
         this.code = idCounter++;
         this.patientID = patientID;
         this.examID = examID;
         this.fastResults = fastResults;
         this.examDate = examDate;
+        this.deleted = deleted;
     }
 
     public int getCode(){
@@ -34,6 +36,10 @@ public class Appointment{
         return this.examDate;
     }
 
+    public boolean getDeleted(){
+        return this.deleted;
+    }
+
     public void setPatientID(int patientID){
         this.patientID = patientID;
     }
@@ -50,9 +56,13 @@ public class Appointment{
         this.examDate = examDate;
     }
 
+    public void setDeleted(boolean deleted){
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString(){
-        return "Appointment Code: " + this.code + "/nPatient ID: " + this.patientID + "/nExam ID: " + this.examID + "/nFast Results: " + this.fastResults + "/nExam Date: " + this.examDate;
+        return "| Appointment Code: " + this.code + " | Patient ID: " + this.patientID + " | Exam ID: " + this.examID + " | Fast Results: " + this.fastResults + " | Exam Date: " + this.examDate;
     }
 
 }
