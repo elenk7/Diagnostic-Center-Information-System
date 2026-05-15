@@ -45,7 +45,7 @@ public class AppointmentMenu{
         String patientName = "";
         String examName = "";
         for(Appointment appointment : appointments.values()){
-            if (appointment.getExamDate() == date){
+            if (appointment.getExamDate().equals(date)){
                 for (Exam exam : exams.values()){
                     if (exam.getCode() == appointment.getExamID()){
                         examName = exam.getExamName();
@@ -60,7 +60,7 @@ public class AppointmentMenu{
                 found = true;
             }
         }
-        if (!found){
+        if (found==false){
             System.out.println("No appointments for this date: " + date);
         }
     }
