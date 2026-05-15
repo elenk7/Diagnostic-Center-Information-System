@@ -2,6 +2,10 @@ import java.util.HashMap;
 public class DoctorMenu{
     private HashMap<Integer, Doctor> doctors = new HashMap<>();
 
+    DoctorMenu(HashMap<Integer, Doctor> doctors){
+        this.doctors = doctors;
+    }
+
     public void addDoctor(Doctor doctor){
         doctors.put(doctor.getCode(), doctor);
     }
@@ -31,10 +35,12 @@ public class DoctorMenu{
             System.out.println("Appointments for Doctor ID: " + doctorID);
             for (Exam exam : exams.values()) {
                 for (Appointment appointment : appointments.values()){
-                    if (exam.getCode() == appointment.getExamID()) {
-                        System.out.println(appointment);
+                    if (!appointment.getDeleted()) {
+                        if (exam.getCode() == appointment.getExamID()) {
+                            System.out.println(appointment);
+                        }
                     }
-                }
+                }   
                 
             }
         }else{
