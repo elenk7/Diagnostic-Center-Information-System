@@ -68,7 +68,7 @@ abstract class Exam{
 
     @Override
     public String toString(){
-        return "AppointmentID: " + this.code + "\nExam Name: " + this.examName + "\nCategory Name: " + this.categoryName + "\nMax Slots per Day: " + this.maxSlots + "\nDoctorID: " + this.doctorID;
+        return "| ExamID: " + this.code + " | Exam Name: " + this.examName + " | Category Name: " + this.categoryName + " | Max Slots per Day: " + this.maxSlots + " | DoctorID: " + this.doctorID;
     }
 
     public boolean findFastResults(int examID, HashMap<Integer, Appointment> appointments){
