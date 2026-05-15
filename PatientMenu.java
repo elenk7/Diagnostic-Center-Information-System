@@ -24,8 +24,9 @@ class PatientMenu {
     public void findByCode(int code, HashMap<Integer, Appointment> appointments ){ 
         Patient patient = patients.get(code);
         if (patient != null) {
+            System.out.println(patient);
             for (Appointment appointment : appointments.values()){
-                if (appointment.getPatientID() == code) {
+                if (appointment.getPatientID() == code && !appointment.getDeleted()) {
                     System.out.println(appointment);
                 }
             }
