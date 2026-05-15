@@ -2,7 +2,6 @@ import java.util.HashMap;
 class ImagingExamination extends Exam {
     private String machineType;
     private double cost;
-    private double examCost;
     private static final double costIncreaseRate = 0.10;
     private boolean fastResults;
     
@@ -26,19 +25,19 @@ class ImagingExamination extends Exam {
 
     public double getCost(HashMap<Integer, Appointment> appointments){
         for(Appointment appointment : appointments.values()){
-            if (this.getCode() == appointment.getExamID()){
+            if (this.getCode() == appointment.getExamID()){  //Checks if the current exam's code matches the exam ID in the appointment. If it does, it retrieves the fast results option from the appointment and stores it in the fastResults variable.
                 fastResults = appointment.getFastResults();
             }
         }
-        if (fastResults){
-            examCost = cost + (cost * costIncreaseRate);
+        if (fastResults){  //If the fast results option is true, it calculates the exam cost by adding a percentage increase to the base cost and returns the updated exam cost.
+            this.cost = cost + (cost * costIncreaseRate);
         }else{
-            examCost = cost;
+            this.cost = cost;
         }   
-        return examCost;
+        return this.cost;
     } 
     
     public String toString(){
-        return super.toString() + "\nMachine Type: " + this.machineType + "\nCost: " + this.examCost;
+        return super.toString() + " | Machine Type: " + this.machineType + " | Cost: " + this.cost;
     }
 }
