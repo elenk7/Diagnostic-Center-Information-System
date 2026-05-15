@@ -2,6 +2,10 @@ import java.util.HashMap;
 
 class PatientMenu {
     private HashMap<Integer, Patient> patients= new HashMap<>();
+
+    PatientMenu(HashMap<Integer, Patient> patients){
+        this.patients = patients;
+    }
    
     public void addPatient(Patient patient){
         patients.put(patient.getCode(), patient);
