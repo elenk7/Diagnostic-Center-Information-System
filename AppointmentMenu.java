@@ -2,6 +2,11 @@ import java.util.HashMap;
 public class AppointmentMenu{
     private HashMap<Integer, Appointment> appointments = new HashMap();
 
+    AppointmentMenu(HashMap<Integer, Appointment> appointments){
+        this.appointments = appointments;    
+    }
+    
+
     public void addAppointment(Appointment appointment){
         appointments.put(appointment.getCode(), appointment);
     }
@@ -11,7 +16,9 @@ public class AppointmentMenu{
             System.out.println("No appointments");
         }else {
             for (Appointment appointment: appointments.values()){
-                System.out.println(appointment);
+                if (!appointment.getDeleted()){
+                    System.out.println(appointment);
+                }
             }     
         }
     }
@@ -33,11 +40,23 @@ public class AppointmentMenu{
         appointments.remove(appointmentCode);
     }
 
-    public void showAppointmentDay(String date){
+    public void showAppointmentDay(String date,HashMap<Integer, Exam> exams, HashMap<Integer, Patient> patients){
         boolean found = false;
+        String patientName = "";
+        String examName = "";
         for(Appointment appointment : appointments.values()){
             if (appointment.getExamDate() == date){
-                System.out.println(appointment);
+                for (Exam exam : exams.values()){
+                    if (exam.getCode() == appointment.getExamID()){
+                        examName = exam.getExamName();
+                    }
+                }
+                for (Patient patient : patients.values()){
+                    if (appointment.getPatientID() == patient.getCode()){
+                        patientName = patient.getName();
+                    }
+                }
+                System.out.println(appointment + " | Patient Name: " + patientName + " | Exam Name: " + examName);
                 found = true;
             }
         }
