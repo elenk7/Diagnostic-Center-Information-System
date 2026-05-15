@@ -1,6 +1,6 @@
 import java.util.HashMap;
 public class MicrobiologicalExamination extends Exam{
-    private double examCost;
+    private double cost;
     private String sampleType;
     private static final double costIncreaseRate = 0.2;
     private boolean fastResults;
@@ -9,7 +9,7 @@ public class MicrobiologicalExamination extends Exam{
         /*Constructor for Microbiological Examination class that initializes the exam name, category name, maximum slots, doctor ID, cost, and sample type.
          It also calls the constructor of the superclass Exam to initialize the common attributes of all exams.*/
         super(examName, categoryName, sampleType, maxSlots, cost, doctorID);
-        this.examCost = cost;
+        this.cost = cost;
         this.sampleType = sampleType;
     }
 
@@ -21,10 +21,10 @@ public class MicrobiologicalExamination extends Exam{
             }
         }
         if(fastResults){  //If the fast results option is true, it calculates the exam cost by adding a percentage increase to the base cost and returns the updated exam cost.
-            this.examCost = this.examCost + this.examCost * costIncreaseRate;
-            return this.examCost;
+            this.cost = this.cost + this.cost * costIncreaseRate;
+            return this.cost;
         }
-        return this.examCost;  //If the fast results option is false, it simply returns the base exam cost without any modifications.
+        return this.cost;  //If the fast results option is false, it simply returns the base exam cost without any modifications.
     }
 
     public String getSampleType(){
@@ -37,6 +37,6 @@ public class MicrobiologicalExamination extends Exam{
 
     @Override
     public String toString(){
-        return super.toString() + "\nSample Type: " + this.sampleType + "\nCost: " + this.examCost;
+        return super.toString() + " | Sample Type: " + this.sampleType + " | Cost: " + this.cost;
     }
 }
