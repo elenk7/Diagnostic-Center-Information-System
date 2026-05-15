@@ -25,6 +25,6 @@ class Human {
     }
 
     public String toString(){
-        return "Name:" + this.name + "\nPhone:" + this.phone;
+        return "| Name:" + this.name + " | Phone:" + this.phone;
     }
 }
