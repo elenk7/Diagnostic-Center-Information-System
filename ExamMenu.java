@@ -3,11 +3,16 @@ import java.util.HashMap;
 public class ExamMenu{
     private HashMap<Integer, Exam> exams = new HashMap<>();
 
+    ExamMenu(HashMap<Integer, Exam> exams){
+        this.exams = exams;
+    }
+    
+
     public void addExam(Exam exam){
         exams.put(exam.getCode(), exam);
     }
 
-    public void showExams(){
+    public void showExamsAlphabetically(){
         if (exams.isEmpty()){
             System.out.println("No exams");
         }else {
@@ -30,7 +35,7 @@ public class ExamMenu{
         for (Exam exam: exams.values()){
             if (exam.getCode() == examID){
                 for(Appointment appointment : appointments.values()){
-                   if (appointment.getExamID() == examID){
+                   if (appointment.getExamID() == examID && appointment.getDeleted() == false){
                     System.out.println(appointment);
                     found = true;
                    }    
