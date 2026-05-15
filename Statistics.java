@@ -45,21 +45,41 @@ public class Statistics{
         }
 
         public void revenueExam(HashMap<Integer, Appointment> appointments, HashMap<Integer, Exam> exams){
-                double sum = 0;
-                for (Exam exam:exams.values()){
-                        double sumExam = 0;
-                        for (Appointment appointment:appointments.values()){
-                                if(appointment.getExamID() == exam.getCode() && !appointment.getDeleted()){
-                                        System.out.println(appointment);
-                                        System.out.println(exam.getCost(appointments));
-                                        sumExam = sumExam + exam.getCost(appointments);
+
+                double totalRevenue = 0;
+
+                for(Exam examCategory : exams.values()){
+
+                        double sum = 0;
+
+                        System.out.println("\nCategory: " + examCategory.getCategoryName());
+
+                        for(Appointment appointment : appointments.values()){
+
+                                if(!appointment.getDeleted()){
+
+                                        for(Exam exam : exams.values()){
+
+                                                if(appointment.getExamID() == exam.getCode()){
+
+                                                        if(exam.getCategoryName().equals(examCategory.getCategoryName())){
+
+                                                                 System.out.println(appointment);
+                                                                System.out.println(exam.getCost(appointments));
+
+                                                                sum = sum + exam.getCost(appointments);
+                                                        }
+                                                }
+                                        }
                                 }
                         }
-                        System.out.println("Exam: " + exam.getExamName() + " Revenue: " + sumExam);
-                        sum = sum + sumExam;
-                }
-                System.out.println("Total Revenue: " + sum);
-        }
 
+                        System.out.println("Category Revenue: " + sum);
+
+                        totalRevenue = totalRevenue + sum;
+                }
+
+                System.out.println("Total Revenue: " + totalRevenue);
+        }
         
 }
