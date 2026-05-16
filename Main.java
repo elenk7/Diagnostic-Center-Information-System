@@ -59,6 +59,7 @@ public class Main {
                             String email = scanner.nextLine();
                             Patient p = new Patient(name, phone, email);
                             patientMenu.addPatient(p);
+                            fm.storeFile(patientsFilePath);
                             break;
                         case 2:
                             // Code to view patients
@@ -107,6 +108,7 @@ public class Main {
                             int experience = scanner.nextInt();
                             Doctor d = new Doctor(name, phone, specialty, experience);
                             doctorMenu.addDoctor(d);
+                            fm.storeFile(doctorsFilePath);
                             //String name, String phone, String specialty, int experience
                             break;
                         case 2:
@@ -171,6 +173,7 @@ public class Main {
                                     ImagingExamination e = new ImagingExamination(examName, categoryName, machineType, maxSlots, cost, doctorID);
                                     examMenu.addExam(e);
                                     e.getCost(fm.appointments);
+                                    fm.storeFile(examsFilePath);
                                     break;
                                 case 2:
                                     categoryName = "Microbiological";
@@ -179,6 +182,7 @@ public class Main {
                                     MicrobiologicalExamination m = new MicrobiologicalExamination(examName, categoryName, sampleType, maxSlots, cost, doctorID);
                                     examMenu.addExam(m);
                                     m.getCost(fm.appointments);
+                                    fm.storeFile(examsFilePath);
                                     break;
                                 case 3:
                                     categoryName = "Specialized";
@@ -187,6 +191,7 @@ public class Main {
                                     SpecializedExamination s = new SpecializedExamination(examName, categoryName, examSpecialty, maxSlots, cost, doctorID);
                                     examMenu.addExam(s);
                                     s.getCost(fm.appointments);
+                                    fm.storeFile(examsFilePath);
                                     break;
                                 default:
                                     System.out.println("Invalid category. Exam not added.");
@@ -278,6 +283,7 @@ public class Main {
                                 boolean deleted = scanner.nextBoolean();
                                 Appointment a = new Appointment(id, eID, fR, examDate, deleted);
                                 appointmentMenu.addAppointment(a);
+                                fm.storeFile(appointmentsFilePath);
                                 break;
                             case 2:
                                 // Code to view appointments
@@ -300,7 +306,8 @@ public class Main {
                                 if (fm.appointments.containsKey(code)){  // Check if appointment exists
                                     fm.appointments.get(code).setDeleted(true);
                                     System.out.println("Appointment removed.");
-                                }   
+                                }
+                                fm.storeFile(appointmentsFilePath);
                                 break;
                             case 5:
                                 // Find Appointment by date
