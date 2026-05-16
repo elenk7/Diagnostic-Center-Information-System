@@ -152,6 +152,7 @@ public class Main {
                             System.out.println("Adding a new exam...");
                             System.out.println("Enter exam name:");
                             String examName = scanner.nextLine();
+                            examName = scanner.nextLine();
                             System.out.println("Enter exam max slots:");
                             int maxSlots = scanner.nextInt();
                             System.out.println("Enter exam cost:");
@@ -164,12 +165,13 @@ public class Main {
                             System.out.println("1. Imaging");
                             System.out.println("2. Microbiological");
                             System.out.println("3. Specialized");
-                            int espec = scanner.nextInt();
+                            int espec = scanner.nextInt(); 
                             switch (espec) {  // Switch statement to determine the type of exam being added based on user input. Depending on the category selected, it prompts the user for additional information specific to that category (e.g., machine type for Imaging, sample type for Microbiological, exam specialty for Specialized) and creates an instance of the corresponding exam class (ImagingExamination, MicrobiologicalExamination, or SpecializedExamination). The newly created exam is then added to the exam menu and its cost is calculated based on the appointments.
                                 case 1:
                                     categoryName = "Imaging";
                                     System.out.println("Enter machine type:");
                                     String machineType = scanner.nextLine();
+                                    machineType = scanner.nextLine();
                                     ImagingExamination e = new ImagingExamination(examName, categoryName, machineType, maxSlots, cost, doctorID);
                                     examMenu.addExam(e);
                                     e.getCost(fm.appointments);
@@ -179,6 +181,7 @@ public class Main {
                                     categoryName = "Microbiological";
                                     System.out.println("Enter sample type:");
                                     String sampleType = scanner.nextLine();
+                                    sampleType = scanner.nextLine();
                                     MicrobiologicalExamination m = new MicrobiologicalExamination(examName, categoryName, sampleType, maxSlots, cost, doctorID);
                                     examMenu.addExam(m);
                                     m.getCost(fm.appointments);
@@ -188,6 +191,7 @@ public class Main {
                                     categoryName = "Specialized";
                                     System.out.println("Enter exam spexialty:");
                                     String examSpecialty = scanner.nextLine();
+                                    examSpecialty = scanner.nextLine();
                                     SpecializedExamination s = new SpecializedExamination(examName, categoryName, examSpecialty, maxSlots, cost, doctorID);
                                     examMenu.addExam(s);
                                     s.getCost(fm.appointments);
@@ -245,16 +249,19 @@ public class Main {
                                     System.out.println("Invalid date format. Please enter the date in YYYY-MM-DD format.");
                                     examDate = scanner.next();
                                     if (examDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                                        int sum = 0;
+                                        
                                         int maxSlots = 0;
-                                        for (Exam exam : fm.exams.values()) {
+                                        int sum = 0;
+                                        Exam exam = fm.exams.get(eID);
+                                        if (exam != null) {
+                                            maxSlots = exam.getMaxSlots();
                                             for (Appointment appointment : fm.appointments.values()) {
                                                 if (appointment.getExamID() == exam.getCode() && appointment.getExamDate().equals(examDate) && !appointment.getDeleted()) {
-                                                    maxSlots = exam.getMaxSlots();
                                                     sum = sum + 1;
                                                 }
                                             }
                                         }
+                                        
                                         if (sum>=maxSlots){
                                             System.out.println("Reached max slots. Choose another date");
                                             examDate = scanner.next();
@@ -277,11 +284,8 @@ public class Main {
                                             examDate = scanner.next();
                                         }   
                                     }
-                                
-                                
-                                System.out.println("Enter deleted (true/false):");
-                                boolean deleted = scanner.nextBoolean();
-                                Appointment a = new Appointment(id, eID, fR, examDate, deleted);
+                                    
+                                Appointment a = new Appointment(id, eID, fR, examDate, false);
                                 appointmentMenu.addAppointment(a);
                                 fm.storeFile(appointmentsFilePath);
                                 break;
@@ -331,7 +335,7 @@ public class Main {
                     System.out.println("Managing Statistics...");
                     System.out.println("1. Revenue by Patient");
                     System.out.println("2. Revenue by Exam");
-                    System.out.println("3. Revenue by Appointment");
+                    System.out.println("3. Revenue by Exam Category");
                     System.out.println("4. Return");
                     int statisticsChoice = new java.util.Scanner(System.in).nextInt();
                     switch (statisticsChoice) {
@@ -348,10 +352,10 @@ public class Main {
                             statistics.revenueExam(fm.appointments, fm.exams);
                             break;
                         case 3:
-                            // Code to calculate revenue by appointment
-                            System.out.println("Calculating revenue by appointment...");
+                            // Code to calculate revenue by category
+                            System.out.println("Calculating revenue by category...");
                             examMenu.showExamsAlphabetically();
-                            statistics.revenueAppointments(fm.appointments, fm.exams);
+                            statistics.revenueExamCategory(fm.appointments, fm.exams);
                             
                             break;
                         case 4:
