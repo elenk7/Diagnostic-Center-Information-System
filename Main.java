@@ -245,50 +245,39 @@ public class Main {
                                 boolean fR = scanner.nextBoolean();
                                 System.out.println("Enter exam date (YYYY-MM-DD):");
                                 String examDate = scanner.next();
-                                while (!examDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                                    System.out.println("Invalid date format. Please enter the date in YYYY-MM-DD format.");
-                                    examDate = scanner.next();
-                                    if (examDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                                        
-                                        int maxSlots = 0;
-                                        int sum = 0;
-                                        Exam exam = fm.exams.get(eID);
-                                        if (exam != null) {
-                                            maxSlots = exam.getMaxSlots();
-                                            for (Appointment appointment : fm.appointments.values()) {
-                                                if (appointment.getExamID() == exam.getCode() && appointment.getExamDate().equals(examDate) && !appointment.getDeleted()) {
-                                                    sum = sum + 1;
-                                                }
+                                
+                                boolean validDate = false;
+                                while (!validDate) {
+                                        if (!examDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                                            System.out.println("Invalid date format. Please enter the date in YYYY-MM-DD format.");
+                                            examDate = scanner.next();
+                                            continue;
+                                        }
+                                    int sum = 0;
+                                    Exam exam = fm.exams.get(eID);
+                                    if (exam != null) {
+                                        int maxSlots = exam.getMaxSlots();
+                                        for (Appointment appointment : fm.appointments.values()) {
+                                            if (appointment.getExamID() == eID &&
+                                                appointment.getExamDate().equals(examDate) &&
+                                                !appointment.getDeleted()) {
+                                                sum++;
                                             }
                                         }
-                                        
-                                        if (sum>=maxSlots){
-                                            System.out.println("Reached max slots. Choose another date");
+                                        if (sum >= maxSlots) {
+                                            System.out.println("Reached max slots. Choose another date.");
                                             examDate = scanner.next();
-                                        }   
+                                            continue;
+                                        }
                                     }
+                                    validDate = true; 
                                 }
-                                if (examDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                                        int sum = 0;
-                                        int maxSlots = 0;
-                                        for (Exam exam : fm.exams.values()) {
-                                            for (Appointment appointment : fm.appointments.values()) {  
-                                                if (appointment.getExamID() == exam.getCode() && appointment.getExamDate().equals(examDate) && !appointment.getDeleted()) {
-                                                    maxSlots = exam.getMaxSlots();
-                                                    sum = sum + 1;
-                                                }
-                                            }
-                                        }
-                                        if (sum>=maxSlots){
-                                            System.out.println("Reached max slots. Choose another date");
-                                            examDate = scanner.next();
-                                        }   
-                                    }
-                                    
-                                Appointment a = new Appointment(id, eID, fR, examDate, false);
-                                appointmentMenu.addAppointment(a);
-                                fm.storeFile(appointmentsFilePath);
-                                break;
+                                if (validDate) {    
+                                    Appointment a = new Appointment(id, eID, fR, examDate, false);
+                                    appointmentMenu.addAppointment(a);
+                                    fm.storeFile(appointmentsFilePath);
+                                    break;
+                                }
                             case 2:
                                 // Code to view appointments
                                 System.out.println("Viewing all appointments...");
