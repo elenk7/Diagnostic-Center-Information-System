@@ -8,25 +8,25 @@ class FileManager {
     HashMap<Integer, Exam> exams = new HashMap<>();
     HashMap<Integer, Appointment> appointments = new HashMap<>();
 
-    void loadFile(String filePath) {
+    void loadFile(String filePath) {  
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {  
 
             String line;
 
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {  // we read the file line by line
 
                 String[] tokens = line.split(" ");
 
                 for (int i = 0; i < tokens.length; i++) {
-                    tokens[i] = tokens[i].trim();
+                    tokens[i] = tokens[i].trim(); // we trim the tokens to remove any leading or trailing whitespace
                 }
 
-                String type = tokens[0];
+                String type = tokens[0];  // the first token of each line indicates the type of the object we want to create (Doctor, Patient, Exam, Appointment)
 
                 if (type.equals("DOCTOR")) {
 
-                    Doctor doctor = new Doctor(
+                    Doctor doctor = new Doctor(  // we create a new doctor object with the information from the file
 							tokens[1],
                             tokens[2],
                             tokens[3],
@@ -34,18 +34,18 @@ class FileManager {
                     );
                     //String name, String phone, String specialty, int experience
 
-                    doctors.put(doctor.getCode(), doctor);
+                    doctors.put(doctor.getCode(), doctor);  // we put the doctor in the doctors HashMap with the code as key and the doctor object as value
                 }
 
                 else if (type.equals("PATIENT")) {
 
-                    Patient patient = new Patient(
+                    Patient patient = new Patient(  // we create a new patient object with the information from the file
 							tokens[1],	
                             tokens[2],
                             tokens[3]
                     );
 
-                    patients.put(patient.getCode(), patient);
+                    patients.put(patient.getCode(), patient);  // we put the patient in the patients HashMap with the code as key and the patient object as value
                 }
 
                 else if(type.equals("EXAM")){
@@ -100,10 +100,10 @@ class FileManager {
 
     void storeFile(String filePath) {
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {  // we use try-with-resources to ensure the writer is closed properly
             if  (filePath.equals("Doctors.txt")){
                 for (Doctor doctor : doctors.values()) {
-                    writer.write("DOCTOR " + doctor.getName() + " " + doctor.getPhone() + " " + doctor.getSpecialty() + " " + doctor.getExperience() + "\n");
+                    writer.write("DOCTOR " + doctor.getName() + " " + doctor.getPhone() + " " + doctor.getSpecialty() + " " + doctor.getExperience() + "\n");  //we write the doctor information in the file in the same format as we read it
                 }
             }
             if (filePath.equals("Patients.txt")){
@@ -123,11 +123,9 @@ class FileManager {
             }
             
         }catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
+            System.err.println("Error writing to file: " + e.getMessage()); 
         }
        
     }// storeFile
-        	
-	
 }
 
