@@ -30,7 +30,7 @@ public class ExamMenu{
         }
     }
 
-    public void examAppointments(int examID, HashMap<Integer, Appointment> appointments){
+    public void examAppointments(int examID, HashMap<Integer, Appointment> appointments){  // we want to find the appointments for a specific exam, so we check if the examID of the appointment matches the code of the exam, if it does we print the appointment
         boolean found = false;
         for (Exam exam: exams.values()){
             if (exam.getCode() == examID){
