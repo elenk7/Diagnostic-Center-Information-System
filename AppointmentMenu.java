@@ -16,9 +16,7 @@ public class AppointmentMenu{
             System.out.println("No appointments");
         }else {
             for (Appointment appointment: appointments.values()){
-                if (!appointment.getDeleted()){
-                    System.out.println(appointment);
-                }
+                System.out.println(appointment);               
             }     
         }
     }
@@ -47,7 +45,7 @@ public class AppointmentMenu{
         for(Appointment appointment : appointments.values()){
             if (appointment.getExamDate().equals(date)){
                 for (Exam exam : exams.values()){
-                    if (exam.getCode() == appointment.getExamID()){
+                    if (exam.getCode() == appointment.getExamID()){  //we check if the examID of the appointment matches the code of the exam, if it does we get the name of the exam to print it later
                         examName = exam.getExamName();
                     }
                 }
