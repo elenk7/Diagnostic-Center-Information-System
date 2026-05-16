@@ -36,7 +36,7 @@ public class DoctorMenu{
             for (Exam exam : exams.values()) {
                 for (Appointment appointment : appointments.values()){
                     if (!appointment.getDeleted()) {
-                        if (exam.getCode() == appointment.getExamID()) {
+                        if (exam.getCode() == appointment.getExamID() && exam.getDoctorID() == doctorID) {
                             System.out.println(appointment);
                         }
                     }
