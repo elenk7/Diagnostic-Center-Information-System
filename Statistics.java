@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.HashSet;
 public class Statistics{
         public void revenuePatient(HashMap<Integer, Appointment> appointments, HashMap<Integer, Exam> exams, HashMap<Integer, Patient> patients){
                 double totalRevenue = 0;
@@ -23,63 +24,44 @@ public class Statistics{
                 System.out.println("Total Revenue: " + totalRevenue + "\n");
         }
         
-        public void revenueAppointments(HashMap<Integer, Appointment> appointments, HashMap<Integer, Exam> exams){
-                double total=0;
-                for(Appointment appointment : appointments.values()){
-                        double sum=0;
-                        for (Exam exam:exams.values()){
-                                if(appointment.getExamID() == exam.getCode() && !appointment.getDeleted()){
-                                        for (Exam exam1:exams.values()){
-                                                if(appointment.getExamID() == exam1.getCode()){
-                                                        sum = sum + exam1.getCost(appointments);
-                                                }
-                                        }
-                                }
-                        } 
-                        System.out.println(appointment + " Revenue: " + sum);
-                        total = total + sum;
-                             
-                }
-                
-                System.out.println("Total Revenue: " + total);
-        }
-
         public void revenueExam(HashMap<Integer, Appointment> appointments, HashMap<Integer, Exam> exams){
-
-                double totalRevenue = 0;
-
-                for(Exam examCategory : exams.values()){
-
-                        double sum = 0;
-
-                        System.out.println("\nCategory: " + examCategory.getCategoryName());
-
-                        for(Appointment appointment : appointments.values()){
-
-                                if(!appointment.getDeleted()){
-
-                                        for(Exam exam : exams.values()){
-
-                                                if(appointment.getExamID() == exam.getCode()){
-
-                                                        if(exam.getCategoryName().equals(examCategory.getCategoryName())){
-
-                                                                 System.out.println(appointment);
-                                                                System.out.println(exam.getCost(appointments));
-
-                                                                sum = sum + exam.getCost(appointments);
-                                                        }
-                                                }
-                                        }
+                double sum = 0;
+                for (Exam exam:exams.values()){
+                        double sumExam = 0;
+                        for (Appointment appointment:appointments.values()){
+                                if(appointment.getExamID() == exam.getCode() && !appointment.getDeleted()){
+                                        System.out.println(appointment);
+                                        System.out.println(exam.getCost(appointments));
+                                        sumExam = sumExam + exam.getCost(appointments);
                                 }
                         }
-
-                        System.out.println("Category Revenue: " + sum);
-
-                        totalRevenue = totalRevenue + sum;
+                        sum = sum + sumExam;
                 }
-
-                System.out.println("Total Revenue: " + totalRevenue);
+                System.out.println("Total Revenue: " + sum);
         }
-        
+
+        public void revenueExamCategory(HashMap<Integer, Appointment> appointments, HashMap<Integer, Exam> exams) {
+                double totalRevenue = 0;
+                HashMap<String, Double> categoryRevenue = new HashMap<>();
+                for (Exam exam : exams.values()) {
+                    double sumCategory = 0;
+                    for (Appointment appointment : appointments.values()) {
+                        if (appointment.getExamID() == exam.getCode() && !appointment.getDeleted()) {
+                            System.out.println(appointment);
+                            System.out.println(exam.getCost(appointments));
+                            sumCategory = sumCategory + exam.getCost(appointments);
+                        }
+                    }
+                    categoryRevenue.put(exam.getCategoryName(), categoryRevenue.getOrDefault(exam.getCategoryName(), 0.0) + sumCategory);
+                }
+                for (String category : categoryRevenue.keySet()) {
+                    System.out.println("Category: " + category + " Revenue: " + categoryRevenue.get(category));
+                        totalRevenue = totalRevenue + categoryRevenue.get(category);
+                }
+                System.out.println("Total Revenue: " + totalRevenue);
+            }
 }
+
+        
+        
+
