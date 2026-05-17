@@ -27,6 +27,10 @@ public class MicrobiologicalExamination extends Exam{
         return this.cost;  //If the fast results option is false, it simply returns the base exam cost without any modifications.
     }
 
+    public double getExamCost(){
+        return this.cost;
+    }
+
     public String getSampleType(){
         return this.sampleType;
     }
