@@ -37,6 +37,9 @@ abstract class Exam{
     public void setMaxSlots(int maxSlots) {
         this.maxSlots = maxSlots;
     }
+    public double getExamCost(){
+        return this.cost;
+    }
    
     public void setDoctorID(int doctorID) {
         this.doctorID = doctorID;
