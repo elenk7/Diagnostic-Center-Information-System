@@ -19,6 +19,9 @@ class SpecializedExamination extends Exam{
     public void setExamSpecialty(String examSpecialty) {
         this.examSpecialty = examSpecialty;
     }
+    public double getExamCost(){
+        return this.cost;
+    }
 
     @Override
     public double getCost(HashMap<Integer, Appointment> appointments){
