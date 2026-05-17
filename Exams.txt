@@ -1,6 +1,5 @@
-EXAM XRAY Imaging X-Ray 10 36.3 2
-EXAM PCR Microbiological Blood 20 20.0 3
-EXAM Stress Specialized Cardiology 3 80.0 1
-EXAM Holter Specialized Cardiology 5 84.5 1
-EXAM EEG Specialized Neurology 10 20.0 4
-EXAM  Microbiological  50 30.0 5
+EXAM XRAY Imaging X-Ray 10 30 2
+EXAM CPR Microbiological Blood 20 20 3
+EXAM Stress Specialized Cardiology 3 80 1
+EXAM Holter Specialized Cardiology 5 50 1
+EXAM EEG Specialized Neurology 10 20 4
